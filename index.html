@@ -1,0 +1,726 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#08060e">
+<title>La Mañana en que Soñé Despertar Contigo</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --gold: #efd18b;
+  --gold-soft: #c5a968;
+  --purple: #d47bff;
+  --bg: #08060e;
+  --panel: rgba(22, 16, 29, .88);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: #f8edda;
+  background:
+    radial-gradient(ellipse at 50% 0%, #34203c 0%, transparent 43%),
+    radial-gradient(ellipse at 10% 55%, #171027 0%, transparent 40%),
+    linear-gradient(180deg, #08060e, #100a17 50%, #050409);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+}
+
+/* Reflejos dorados y pequeños destellos */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .3;
+  z-index: 0;
+  background:
+    radial-gradient(1px 1px at 12% 16%, #ffe8ae 99%, transparent),
+    radial-gradient(2px 2px at 82% 23%, #d7a8ff 99%, transparent),
+    radial-gradient(1px 1px at 72% 73%, #ffe8ae 99%, transparent),
+    radial-gradient(2px 2px at 19% 84%, #d7a8ff 99%, transparent),
+    radial-gradient(1px 1px at 91% 62%, #ffe8ae 99%, transparent);
+  background-size: 230px 250px;
+}
+
+.water {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: .25;
+  background: repeating-linear-gradient(
+    178deg,
+    transparent 0px,
+    transparent 8px,
+    rgba(218, 177, 255, .12) 9px,
+    transparent 11px,
+    rgba(239, 209, 139, .1) 13px,
+    transparent 17px
+  );
+  mask-image: linear-gradient(transparent, black);
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: min(790px, 92%);
+  margin: 0 auto;
+  padding: 30px 0 45px;
+}
+
+/* Encabezado */
+
+.top-label {
+  text-align: center;
+  color: var(--gold);
+  font-size: .66rem;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  margin: 10px 0 18px;
+}
+
+.crown {
+  text-align: center;
+  font-size: 29px;
+  color: var(--gold);
+  text-shadow: 0 0 22px rgba(239, 209, 139, .6);
+  margin-bottom: 9px;
+}
+
+.intro {
+  text-align: center;
+  color: #d7c5e6;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  margin-bottom: 25px;
+}
+
+/* Marco para la fotografía */
+
+.photo-frame {
+  position: relative;
+  padding: 9px;
+  border: 1px solid rgba(239, 209, 139, .7);
+  border-radius: 20px 20px 65px 20px;
+  background: linear-gradient(135deg,
+    rgba(239, 209, 139, .14),
+    rgba(94, 53, 123, .12),
+    rgba(239, 209, 139, .04));
+  box-shadow:
+    0 0 25px rgba(200, 143, 255, .08),
+    inset 0 0 20px rgba(239, 209, 139, .04);
+  margin-bottom: 32px;
+}
+
+.photo-frame::before {
+  content: "✦  NUESTRA PEQUEÑA ETERNIDAD  ✦";
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: -12px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  padding: 7px 14px;
+  color: var(--gold);
+  background: #100a17;
+  border: 1px solid rgba(239, 209, 139, .45);
+  border-radius: 30px;
+  font-size: .56rem;
+  letter-spacing: .15em;
+}
+
+.photo-inner {
+  position: relative;
+  min-height: 190px;
+  height: clamp(210px, 48vw, 400px);
+  overflow: hidden;
+  border-radius: 13px 13px 52px 13px;
+  background:
+    radial-gradient(ellipse at center, #382443, #100b18 72%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-in;
+  touch-action: manipulation;
+}
+
+.photo-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .5s ease, filter .5s ease;
+}
+
+.photo-inner:hover img {
+  transform: scale(1.025);
+  filter: brightness(1.05);
+}
+
+.photo-placeholder {
+  padding: 25px;
+  text-align: center;
+  color: #d9c4e9;
+  line-height: 1.9;
+  font-size: .8rem;
+}
+
+.photo-placeholder .cat {
+  display: block;
+  font-size: 3rem;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 0 12px #a66cdb);
+}
+
+.photo-hint {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  color: white;
+  background: rgba(8, 6, 14, .75);
+  border: 1px solid rgba(239, 209, 139, .5);
+  padding: 8px 11px;
+  border-radius: 30px;
+  font-size: .62rem;
+  letter-spacing: .04em;
+}
+
+/* Carta */
+
+.letter {
+  position: relative;
+  padding: clamp(22px, 5vw, 43px);
+  background:
+    linear-gradient(155deg, rgba(31, 22, 39, .96), rgba(11, 8, 17, .96));
+  border: 1px solid rgba(239, 209, 139, .34);
+  border-radius: 4px 35px 4px 35px;
+  box-shadow:
+    0 20px 70px rgba(0, 0, 0, .38),
+    0 0 35px rgba(161, 94, 204, .06);
+}
+
+.letter::before,
+.letter::after {
+  position: absolute;
+  color: rgba(239, 209, 139, .58);
+  font-size: 23px;
+}
+
+.letter::before {
+  content: "✧";
+  top: 12px;
+  left: 16px;
+}
+
+.letter::after {
+  content: "✧";
+  bottom: 12px;
+  right: 16px;
+}
+
+h1 {
+  margin: 0 auto 26px;
+  max-width: 620px;
+  color: var(--gold);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 7vw, 3.35rem);
+  line-height: 1.08;
+  font-weight: 600;
+  text-align: center;
+  text-shadow: 0 0 23px rgba(239, 209, 139, .17);
+}
+
+h1 .ornament {
+  display: block;
+  margin-bottom: 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .75rem;
+  letter-spacing: .2em;
+}
+
+.nickname {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: #f4c9ee;
+  margin: 0 0 28px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  margin: 23px 0;
+  color: var(--gold);
+  font-size: .8rem;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  width: 65px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-soft));
+}
+
+.divider::after {
+  transform: rotate(180deg);
+}
+
+.letter p {
+  color: #eee4f0;
+  font-size: clamp(.91rem, 2.7vw, 1.02rem);
+  line-height: 2;
+  letter-spacing: .012em;
+  margin: 0 0 23px;
+  text-align: left;
+}
+
+.letter strong {
+  color: #ffe0a0;
+  font-weight: 600;
+  text-shadow: 0 0 13px rgba(239, 209, 139, .12);
+}
+
+.signature {
+  margin-top: 35px !important;
+  color: #f0d8f8 !important;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem !important;
+  font-style: italic;
+  text-align: center !important;
+}
+
+.paw-divider {
+  text-align: center;
+  color: var(--gold-soft);
+  letter-spacing: .7em;
+  margin: 24px 0;
+  opacity: .8;
+}
+
+/* Declaración final */
+
+.final-love {
+  position: relative;
+  margin-top: 32px;
+  padding: 28px 20px;
+  text-align: center;
+  border: 1px solid rgba(205, 118, 255, .38);
+  border-radius: 22px 5px 22px 5px;
+  background:
+    radial-gradient(ellipse at center, rgba(119, 41, 157, .14), transparent 75%);
+  box-shadow: 0 0 28px rgba(187, 74, 255, .07);
+}
+
+.final-love .small-cat {
+  font-size: 1.6rem;
+  margin-bottom: 13px;
+}
+
+.final-love p {
+  margin: 0 0 15px;
+  color: #e9c8ff;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.15rem, 4vw, 1.45rem);
+  line-height: 1.65;
+  font-style: italic;
+}
+
+.final-love .neon {
+  color: #e9a2ff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: clamp(.95rem, 3.8vw, 1.2rem);
+  letter-spacing: .055em;
+  text-shadow:
+    0 0 5px #d56aff,
+    0 0 12px #bd49ff,
+    0 0 28px #9b27ff;
+  animation: glow 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px #d56aff, 0 0 12px #bd49ff;
+  }
+  to {
+    text-shadow: 0 0 7px #f1c6ff, 0 0 18px #bd49ff, 0 0 32px #9425ff;
+  }
+}
+
+.footer-note {
+  text-align: center;
+  margin: 25px 0 20px;
+  color: #b9a7c7;
+  font-size: .68rem;
+  letter-spacing: .12em;
+  line-height: 1.9;
+}
+
+/* Botón del poema */
+
+.poem-area {
+  text-align: center;
+  margin: 30px 0 10px;
+}
+
+.poem-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  width: min(100%, 380px);
+  padding: 17px 23px;
+  border-radius: 40px;
+  border: 1px solid rgba(239, 209, 139, .8);
+  color: #ffe7ae;
+  background: linear-gradient(120deg, #281833, #171020, #30203a);
+  text-decoration: none;
+  font-size: .82rem;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: .06em;
+  box-shadow: 0 0 25px rgba(196, 146, 255, .11);
+  transition: transform .25s, box-shadow .25s;
+}
+
+.poem-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 28px rgba(196, 146, 255, .3);
+}
+
+.foot-paw {
+  display: block;
+  margin-top: 24px;
+  text-align: center;
+  font-size: 1.3rem;
+  letter-spacing: .4em;
+  color: var(--gold-soft);
+}
+
+/* Vista de imagen completa */
+
+.image-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(3, 2, 7, .97);
+  align-items: center;
+  justify-content: center;
+  padding: 68px 12px 20px;
+}
+
+.image-modal.open {
+  display: flex;
+}
+
+.image-modal img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100dvh - 100px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border: 1px solid rgba(239, 209, 139, .65);
+  border-radius: 8px;
+  box-shadow: 0 0 35px rgba(197, 105, 255, .2);
+}
+
+.back-button {
+  position: absolute;
+  top: max(14px, env(safe-area-inset-top));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  border: 1px solid #efd18b;
+  border-radius: 30px;
+  padding: 12px 21px;
+  color: #ffe8b0;
+  background: #1a1023;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .85rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(239, 209, 139, .16);
+  white-space: nowrap;
+}
+
+.back-button:hover {
+  background: #342040;
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 93%;
+    padding-top: 20px;
+  }
+
+  .letter {
+    padding: 27px 20px;
+  }
+
+  .letter p {
+    line-height: 1.9;
+  }
+
+  .photo-inner {
+    height: 250px;
+  }
+
+  .image-modal {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="water"></div>
+
+<main class="container">
+
+  <div class="top-label">Una caricia para tu alma · Octubre 2026</div>
+  <div class="crown">♛ ♡ ♛</div>
+  <div class="intro">Una pequeña eternidad guardada entre ronroneos y latidos...</div>
+
+  <!-- ESPACIO PARA LA FOTO
+       Cambia el valor de FOTO_AQUI.jpg por el nombre exacto
+       de tu imagen subida al mismo repositorio. -->
+  <div class="photo-frame">
+    <div class="photo-inner" id="photoArea" title="Toca dos veces para ampliar la fotografía">
+      <div class="photo-placeholder" id="photoPlaceholder">
+        <span class="cat">🐈‍⬛</span>
+        <span>Un rinconcito reservado para nuestra fotografía especial</span>
+        <br>
+        <span style="color:#efd18b">♡ Toca dos veces la foto para verla completa ♡</span>
+      </div>
+
+      <img
+        id="lovePhoto"
+        src="IMG_20261008_222802.png"
+        alt="Una fotografía especial para Valeria"
+        hidden
+      >
+
+      <span class="photo-hint" id="photoHint" hidden>♡ Doble toque para ampliar</span>
+    </div>
+  </div>
+
+  <article class="letter">
+
+    <h1>
+      <span class="ornament">✦ ♡ ✦</span>
+      ✦ La Mañana en que Soñé Despertar Contigo ✦
+    </h1>
+
+    <div class="divider">❦</div>
+
+    <p class="nickname">Mi Sueñito de Mirada Infinita, ❤️‍🩹🥺</p>
+
+    <p>Buenos días, mi princesa preciosa. Esta es nuestra novena cartita de octubre, un pedacito de mi corazón que dejé preparado para ti desde temprano, para que puedas encontrar mi amor en cualquier momento de tu día. 💗</p>
+
+    <p>A veces siento que el tiempo pasa lento cuando estoy sin ti, pero también demasiado rápido cuando pienso en lo mucho que deseo compartir mi vida contigo. Quizá sea egoísta querer que los días vuelen para tenerte cerquita, pero, mi amor, <strong>extrañarte tanto y no poder abrazarte hace que hasta las horas más pequeñas pesen sin ti.</strong> 🥺💋</p>
+
+    <p>Ayer tuve un sueño tan bonito… despertaba y, al abrir mis ojos, te encontraba a mi ladito. Me quedaba contemplando fijamente tus ojitos hermosos, esperando a que despertaras, disfrutando de esa paz que sentía simplemente por tenerte ahí. Y aunque solo fue un sueño, mi corazón fue tan feliz que todavía quisiera volver a ese instante. ❤️‍🔥</p>
+
+    <p>Mi vida, ojalá pronto podamos despertar juntitos de verdad, mirarnos a los ojos todavía adormilados y sonreír sabiendo que no tenemos que despedirnos todavía. Quiero que algún día ese sueño deje de ser un deseo y se convierta en uno de nuestros recuerdos más bonitos.</p>
+
+    <p><strong>Te amo, mi princesa, y si pudiera elegir dónde despertar cada mañana, elegiría una y mil veces a tu ladito, porque hasta mis sueños saben que mi lugar favorito siempre será junto a ti.</strong> 💍❤️‍🔥</p>
+
+    <div class="paw-divider">🐾 ✧ 🐾</div>
+
+    <p class="signature">Con todo mi amor, desde antes de que despiertes y durante cada latido de mi día,</p>
+
+    <div class="divider">♡ ✧ ♡</div>
+
+    <!-- DECLARACIÓN FINAL EN FRANCÉS, DEDICADA A NOAH -->
+    <section class="final-love">
+      <div class="small-cat">🐈‍⬛ 💜 🐾</div>
+
+      <p>
+        Mon amour, je te choisirais dans tous mes rêves et dans toutes mes vies ;
+        que notre petit Noah veille sur nous depuis le ciel et nous accompagne
+        partout où nos cœurs nous mèneront, ma précieuse princesse. 🥺💜
+      </p>
+
+      <p class="neon">
+        JE T’AIME, VALERIA PETRO VILLAZÓN. ❤️‍🔥💜
+      </p>
+    </section>
+
+  </article>
+
+  <div class="footer-note">
+    UNE LETTRE, MILLE ÉMOTIONS<br>
+    ♡ Guardada para ti, disponible desde tu primer despertar ♡
+  </div>
+
+  <!-- CAMBIA ENLACE_DEL_POEMA por la URL de GitHub Pages de tu poema -->
+  <div class="poem-area">
+    <a
+      class="poem-button"
+      id="poemLink"
+      href="ENLACE_DEL_POEMA"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span>🐾</span>
+      <span>Abrir el poema de hoy</span>
+      <span>♡ ↗</span>
+    </a>
+  </div>
+
+  <span class="foot-paw">✧ 🐾 ✧ 🐈‍⬛ ✧</span>
+
+</main>
+
+<!-- Visor de fotografía a pantalla completa -->
+<div
+  class="image-modal"
+  id="imageModal"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Fotografía ampliada"
+  aria-hidden="true"
+>
+  <button class="back-button" id="backButton" type="button">
+    ← Volver a la carta
+  </button>
+  <img id="modalPhoto" src="" alt="Fotografía ampliada">
+</div>
+
+<script>
+(() => {
+  const photo = document.getElementById('lovePhoto');
+  const photoArea = document.getElementById('photoArea');
+  const placeholder = document.getElementById('photoPlaceholder');
+  const photoHint = document.getElementById('photoHint');
+  const modal = document.getElementById('imageModal');
+  const modalPhoto = document.getElementById('modalPhoto');
+  const backButton = document.getElementById('backButton');
+
+  let lastTap = 0;
+  let previousOverflow = '';
+
+  // Mostrar la foto solo si el archivo indicado existe y carga correctamente.
+  function showPhoto() {
+    photo.hidden = false;
+    placeholder.hidden = true;
+    photoHint.hidden = false;
+  }
+
+  function hidePhoto() {
+    photo.hidden = true;
+    placeholder.hidden = false;
+    photoHint.hidden = true;
+  }
+
+  photo.addEventListener('load', showPhoto);
+  photo.addEventListener('error', hidePhoto);
+
+  if (photo.complete && photo.naturalWidth > 0) {
+    showPhoto();
+  } else if (photo.complete && photo.naturalWidth === 0) {
+    hidePhoto();
+  }
+
+  function openPhoto() {
+    if (photo.hidden || !photo.naturalWidth) return;
+
+    previousOverflow = document.body.style.overflow;
+    modalPhoto.src = photo.src;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    backButton.focus();
+  }
+
+  function closePhoto() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    modalPhoto.src = '';
+    document.body.style.overflow = previousOverflow;
+    photoArea.focus?.();
+  }
+
+  // Doble clic para computador.
+  photoArea.addEventListener('dblclick', (event) => {
+    event.preventDefault();
+    openPhoto();
+  });
+
+  // Doble toque para celulares.
+  photoArea.addEventListener('touchend', (event) => {
+    const now = Date.now();
+
+    if (now - lastTap < 350) {
+      event.preventDefault();
+      openPhoto();
+      lastTap = 0;
+    } else {
+      lastTap = now;
+    }
+  }, { passive: false });
+
+  // El botón permanece claramente visible en el visor.
+  backButton.addEventListener('click', closePhoto);
+
+  // Tocar el fondo oscuro también cierra la vista.
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) closePhoto();
+  });
+
+  // Esc cierra el visor en computador.
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && modal.classList.contains('open')) {
+      closePhoto();
+    }
+  });
+
+  // Evitar que el enlace provisional envíe a una dirección inexistente.
+  const poemLink = document.getElementById('poemLink');
+
+  poemLink.addEventListener('click', (event) => {
+    if (poemLink.getAttribute('href') === 'ENLACE_DEL_POEMA' ||
+        !poemLink.getAttribute('href').trim()) {
+      event.preventDefault();
+      alert('Añade primero el enlace de GitHub Pages de tu poema.');
+    }
+  });
+})();
+</script>
+</body>
+</html>
